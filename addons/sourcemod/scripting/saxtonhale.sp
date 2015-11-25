@@ -762,6 +762,7 @@ public OnPluginStart()
 
     HookEvent("teamplay_round_start", event_round_start);
     HookEvent("teamplay_round_win", event_round_end);
+    HookEvent("teamplay_broadcast_audio", event_broadcast, EventHookMode_Pre); // No point in having the administrator's end-of-round announcements overlap Hale's voicelines.
     HookEvent("player_changeclass", event_changeclass);
     HookEvent("player_spawn", event_player_spawn);
     HookEvent("player_death", event_player_death, EventHookMode_Pre);
@@ -2175,6 +2176,17 @@ CalcScores()
             }
         }
     }
+}
+
+public Action:event_broadcast(Handle:event, const String:name[], bool:dontBroadcast)
+{
+    new String:strAudio[PLATFORM_MAX_PATH];
+    GetEventString(event, "sound", strAudio, sizeof(strAudio));
+    if(strncmp(strAudio, "Game.Your", 9) == 0 || strcmp(strAudio, "Game.Stalemate") == 0)
+    {
+        return Plugin_Handled;
+    }
+    return Plugin_Continue;
 }
 
 public Action:StartResponceTimer(Handle:hTimer)
