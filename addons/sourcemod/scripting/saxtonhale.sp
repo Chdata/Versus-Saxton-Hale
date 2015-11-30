@@ -6047,7 +6047,7 @@ SickleClimbWalls(client, weapon)     //Credit to Mecha the Slag
     GetClientEyeAngles(client, vecClientEyeAng);       // Get the angle the player is looking
 
     //Check for colliding entities
-    TR_TraceRayFilter(vecClientEyePos, vecClientEyeAng, MASK_PLAYERSOLID, RayType_Infinite, TraceRayDontHitSelf, client);
+    TR_TraceRayFilter(vecClientEyePos, vecClientEyeAng, MASK_VISIBLE_AND_NPCS|CONTENTS_WINDOW|CONTENTS_GRATE, RayType_Infinite, TraceRayDontHitSelf, client);
 
     if (!TR_DidHit(INVALID_HANDLE)) return;
 
