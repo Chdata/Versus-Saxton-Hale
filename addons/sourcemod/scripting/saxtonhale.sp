@@ -3860,6 +3860,10 @@ public Action:ClientTimer(Handle:hTimer)
                     {
                         TF2_AddCondition(client, TFCond_SpeedBuffAlly, 0.3);
                     }
+                    if (GetEntProp(medigun, Prop_Send, "m_bChargeRelease") && GetEntPropFloat(medigun, Prop_Send, "m_flChargeLevel") > 0.0)
+                    {
+                        TF2_AddCondition(client, TFCond_Ubercharged, TFCondDuration_Infinite);
+                    }
                 }
             }
 
