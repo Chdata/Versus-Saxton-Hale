@@ -2123,14 +2123,14 @@ public Action:event_round_end(Handle:event, const String:name[], bool:dontBroadc
             if (IsClientInGame(i) && !(GetClientButtons(i) & IN_SCORE))
             {
                 SetGlobalTransTarget(i);
-//              if (numHaleKills < 2 && false) ShowHudText(i, -1, "%t\n1)%i - %s\n2)%i - %s\n3)%i - %s\n\n%t %i\n%t %i", "vsh_top_3", Damage[top[0]], s, Damage[top[1]], s1, Damage[top[2]], s2, "vsh_damage_fx", Damage[i], "vsh_scores", RoundFloat(Damage[i] / 600.0));
+//              if (numHaleKills < 2 && false) ShowHudText(i, -1, "%t\n1)%i - %s\n2)%i - %s\n3)%i - %s\n\n%t %i\n%t %i", "vsh_top_3", Damage[top[0]], s, Damage[top[1]], s1, Damage[top[2]], s2, "vsh_damage_fx", Damage[i], "vsh_scores", RoundToFloor(Damage[i] / 600.0));
 //              else
                 ShowSyncHudText(i, infoHUD, "%t\n1)%i - %s\n2)%i - %s\n3)%i - %s\n\n%t %i\n%t %i", "vsh_top_3",
                     Damage[top[0]], s,
                     Damage[top[1]], s1,
                     Damage[top[2]], s2,
                     "vsh_damage_fx",Damage[i],
-                    "vsh_scores", RoundFloat(Damage[i] / 600.0)
+                    "vsh_scores", RoundToFloor(Damage[i] / 600.0)
                 );
             }
         }
@@ -2150,7 +2150,7 @@ public Action:Timer_CalcScores(Handle:timer)
 }
 CalcScores()
 {
-    decl j, damage;
+    decl damage;
     //new bool:spec = GetConVarBool(cvarForceSpecToHale);
     botqueuepoints += 5;
     for (new i = 1; i <= MaxClients; i++)
@@ -2160,8 +2160,7 @@ CalcScores()
             damage = Damage[i];
             new Handle:aevent = CreateEvent("player_escort_score", true);
             SetEventInt(aevent, "player", i);
-            for (j = 0; damage - 600 > 0; damage -= 600, j++){}
-            SetEventInt(aevent, "points", j);
+            SetEventInt(aevent, "points", RoundToFloor(damage / 600.0));
             FireEvent(aevent);
             if (i == Hale)
             {
@@ -5014,7 +5013,7 @@ public Action:Timer_Damage(Handle:hTimer, any:id)
     if (IsValidClient(client)) // IsValidClient(client, false)
         CPrintToChat(client, "{olive}[VSH]{default} %t. %t %i",
             "vsh_damage", Damage[client],
-            "vsh_scores", RoundFloat(Damage[client] / 600.0)
+            "vsh_scores", RoundToFloor(Damage[client] / 600.0)
         );
     return Plugin_Continue;
 }
