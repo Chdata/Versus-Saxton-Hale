@@ -522,6 +522,7 @@ static bool:PointReady;
 static tf_arena_use_queue;
 static mp_teams_unbalance_limit;
 static tf_arena_first_blood;
+static Float:tf_arena_preround_time;
 static mp_forcecamera;
 static Float:tf_scout_hype_pep_max;
 static tf_dropped_weapon_lifetime;
@@ -916,6 +917,7 @@ public OnConfigsExecuted()
         tf_arena_use_queue = GetConVarInt(FindConVar("tf_arena_use_queue"));
         mp_teams_unbalance_limit = GetConVarInt(FindConVar("mp_teams_unbalance_limit"));
         tf_arena_first_blood = GetConVarInt(FindConVar("tf_arena_first_blood"));
+        tf_arena_preround_time = GetConVarFloat(FindConVar("tf_arena_preround_time"));
         mp_forcecamera = GetConVarInt(FindConVar("mp_forcecamera"));
         tf_scout_hype_pep_max = GetConVarFloat(FindConVar("tf_scout_hype_pep_max"));
         tf_dropped_weapon_lifetime = GetConVarInt(FindConVar("tf_dropped_weapon_lifetime"));
@@ -1703,7 +1705,7 @@ public Action:event_round_start(Handle:event, const String:name[], bool:dontBroa
         SearchForItemPacks();
         SetConVarInt(FindConVar("mp_teams_unbalance_limit"), 1);
 
-        CreateTimer(71.0, Timer_EnableCap, _, TIMER_FLAG_NO_MAPCHANGE);
+        CreateTimer(tf_arena_preround_time + 61.0, Timer_EnableCap, _, TIMER_FLAG_NO_MAPCHANGE);
         return Plugin_Continue;
     }
 
@@ -1740,17 +1742,17 @@ public Action:event_round_start(Handle:event, const String:name[], bool:dontBroa
         Hale = tHale;
     }
 
-    SetNextTime(e_flNextAllowBossSuicide, 29.1);
-    SetNextTime(e_flNextAllowOtherSpawnTele, 60.0);
+    SetNextTime(e_flNextAllowBossSuicide, tf_arena_preround_time + 19.1);
+    SetNextTime(e_flNextAllowOtherSpawnTele, tf_arena_preround_time + 50.0);
 
     // bTenSecStart[0] = true;
     // bTenSecStart[1] = true;
     // CreateTimer(29.1, tTenSecStart, 0);
     // CreateTimer(60.0, tTenSecStart, 1);
 
-    CreateTimer(9.1, StartHaleTimer, _, TIMER_FLAG_NO_MAPCHANGE);
-    CreateTimer(3.5, StartResponceTimer, _, TIMER_FLAG_NO_MAPCHANGE);
-    CreateTimer(9.6, MessageTimer, true, TIMER_FLAG_NO_MAPCHANGE);
+    CreateTimer(tf_arena_preround_time - 0.9, StartHaleTimer, _, TIMER_FLAG_NO_MAPCHANGE);
+    CreateTimer(tf_arena_preround_time/2.86, StartResponceTimer, _, TIMER_FLAG_NO_MAPCHANGE);
+    CreateTimer(tf_arena_preround_time - 0.4, MessageTimer, true, TIMER_FLAG_NO_MAPCHANGE);
     //bNoTaunt = false;
     HaleRage = 0;
     g_flStabbed = 0.0;
@@ -2480,7 +2482,7 @@ public Action:StartRound(Handle:hTimer)
             //EquipSaxton(Hale);
         }
     }
-    CreateTimer(10.0, Timer_SkipHalePanel);
+    CreateTimer(tf_arena_preround_time, Timer_SkipHalePanel);
     return Plugin_Continue;
 }
 public Action:Timer_ReEquipSaxton(Handle:timer)
