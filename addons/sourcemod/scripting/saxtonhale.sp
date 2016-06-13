@@ -1891,6 +1891,7 @@ SpawnRandomAmmo()
         DispatchSpawn(iEnt2);
         SetEntProp(iEnt2, Prop_Send, "m_iTeamNum", g_bEnabled?OtherTeam:0, 4);
     }
+    SearchForItemPacks();
 }
 
 SpawnRandomHealth()
@@ -1914,6 +1915,7 @@ SpawnRandomHealth()
         DispatchSpawn(iEnt2);
         SetEntProp(iEnt2, Prop_Send, "m_iTeamNum", g_bEnabled?OtherTeam:0, 4);
     }
+    SearchForItemPacks();
 }
 
 public Action:Timer_EnableCap(Handle:timer)
@@ -2838,10 +2840,10 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "155 ; 1 ; 160 ; 1", true);
         }
-        case 232, 401: // Bushwacka + Shahanshah
+        /*case 232, 401: // Bushwacka + Shahanshah
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "236 ; 1");
-        }
+        }*/
         case 356: // Kunai
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "125 ; -60");
@@ -2852,7 +2854,7 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
         }
         case 220: // Shortstop - Effects are no longer 'only while active'. Otherwise acts like post-gunmettle shortstop.
         {
-            hItemOverride = PrepareItemHandle(hItem, _, _, "525 ; 1 ; 526 ; 1.2 ; 533 ; 1.4 ; 534 ; 1.4 ; 328 ; 1 ; 241 ; 1.5", true);
+            hItemOverride = PrepareItemHandle(hItem, _, _, "526 ; 1.2 ; 534 ; 1.4 ; 535 ; 1.4 ; 536 ; 1.0 ; 328 ; 1 ; 241 ; 1.5", true);
         }
         case 226: // The Battalion's Backup
         {
@@ -2882,7 +2884,7 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
             }
             else
             {
-                hItemOverride = PrepareItemHandle(hItem, _, _,             "179 ; 1 ; 265 ; 99999.0 ; 178 ; 0.6 ; 3 ; 0.67 ; 551 ; 1 ; 5 ; 1.15", true); //  ; 2 ; 1.1
+                hItemOverride = PrepareItemHandle(hItem, _, _, "179 ; 1 ; 265 ; 99999.0 ; 178 ; 0.6 ; 3 ; 0.67 ; 551 ; 1 ; 5 ; 1.15", true); //  ; 2 ; 1.1
             }
         
         }
@@ -2920,7 +2922,7 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
             {
                 hItemOverride = PrepareItemHandle(hItem, _, _, "135 ; 0.6 ; 265 ; 99999.0"); // Soldier shotguns get 40% rocket jump dmg reduction     ; 265 ; 99999.0
             }
-            else if (StrStarts(classname, "tf_weapon_rocketlauncher", false)  || GunmettleToIndex(iItemDefinitionIndex) == TFWeapon_RocketLauncher)
+            else if (StrStarts(classname, "tf_weapon_rocketlauncher", false)  || StrStarts(classname, "tf_weapon_particle_cannon", false) || GunmettleToIndex(iItemDefinitionIndex) == TFWeapon_RocketLauncher)
             {
                 if (iItemDefinitionIndex == 127) // Direct hit
                 {
@@ -3073,12 +3075,12 @@ public Action:MakeNoHale(Handle:hTimer, any:clientid)
                 TF2_RemoveWeaponSlot(client, TFWeaponSlot_Primary);
                 SpawnWeapon(client, "tf_weapon_scattergun", 13, 1, 0, "");
             }
-            case 237:
+            /*case 237:
             {
                 TF2_RemoveWeaponSlot(client, TFWeaponSlot_Primary);
                 SpawnWeapon(client, "tf_weapon_rocketlauncher", 18, 1, 0, "265 ; 99999.0");
                 SetAmmo(client, 0, 20);
-            }
+            }*/
             case 17, 204, 36, 412:
             {
                 if (GetEntProp(weapon, Prop_Send, "m_iEntityQuality") != 10)
