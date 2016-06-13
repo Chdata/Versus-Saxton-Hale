@@ -3755,7 +3755,7 @@ public Action:ClientTimer(Handle:hTimer)
     {
         return Plugin_Stop;
     }
-    decl String:wepclassname[32];
+    decl String:wepclassname[35];
     new i = -1;
     for (new client = 1; client <= MaxClients; client++)
     {
@@ -3918,7 +3918,7 @@ public Action:ClientTimer(Handle:hTimer)
             if (validwep && weapon == GetPlayerWeaponSlot(client, TFWeaponSlot_Melee))  //&& index != 4 && index != 194 && index != 225 && index != 356 && index != 461 && index != 574) addthecrit = true; //class != TFClass_Spy
             {
                 //slightly longer check but makes sure that any weapon that can backstab will not crit (e.g. Saxxy)
-                if (strcmp(wepclassname, "tf_weapon_knife", false) != 0 && index != 416)
+                if (!StrStarts(wepclassname, "tf_weapon_knife") && index != 416)
                     addthecrit = true;
             }
             switch (index) //Specific (mini)critlist
@@ -3935,20 +3935,18 @@ public Action:ClientTimer(Handle:hTimer)
             }
             if (validwep && weapon == GetPlayerWeaponSlot(client, TFWeaponSlot_Primary)) // Primary weapon crit list
             {
-                if (strncmp(wepclassname, "tf_weapon_comp", 14, false) == 0 || // Sniper bows
-                   strncmp(wepclassname, "tf_weapon_cros", 14, false) == 0 || // Medic crossbows
-                   strncmp(wepclassname, "tf_weapon_shotgun_buil", 22, false) == 0 || // Engineer Rescue Ranger
-                   strncmp(wepclassname, "tf_weapon_drg_pom", 17, false) == 0) // Engineer Pomson
+                if (StrStarts(wepclassname, "tf_weapon_compound_bow") || // Sniper bows
+                   StrStarts(wepclassname, "tf_weapon_crossbow") || // Medic crossbows
+                   StrEqual(wepclassname, "tf_weapon_shotgun_building_rescue") || // Engineer Rescue Ranger
+                   StrEqual(wepclassname, "tf_weapon_drg_pom")) // Engineer Pomson
                     addthecrit = true;
             }
             if (validwep && weapon == GetPlayerWeaponSlot(client, TFWeaponSlot_Secondary)) // Secondary weapon crit list
             {
-                if (strncmp(wepclassname, "tf_weapon_pis", 13, false) == 0 || // Engineer/Scout pistols
-                   strncmp(wepclassname, "tf_weapon_han", 13, false) == 0 || // Scout pistols
-                   strncmp(wepclassname, "tf_weapon_flar", 14, false) == 0 || // Flare guns
-                   strncmp(wepclassname, "tf_weapon_smg", 13, false) == 0 || // Sniper SMGs
-                   strncmp(wepclassname, "tf_weapon_jar", 13, false) == 0 || // Throwables (Jarate, Mad Milk)
-                   strncmp(wepclassname, "tf_weapon_clea", 14, false) == 0) // Throwables (Flying Guillotine)
+                if (StrStarts(wepclassname, "tf_weapon_pistol") || // Engineer/Scout pistols
+                   StrStarts(wepclassname, "tf_weapon_handgun_scout_secondary") || // Scout pistols
+                   StrStarts(wepclassname, "tf_weapon_flaregun") || // Flare guns
+                   StrEqual(wepclassname, "tf_weapon_smg")) // Sniper SMGs minus Cleaner's Carbine
                 {
                     if (class == TFClass_Scout && cond == TFCond_HalloweenCritCandy) cond = TFCond_Buffed;
 
@@ -3959,6 +3957,9 @@ public Action:ClientTimer(Handle:hTimer)
                     else
                         addthecrit = true;
                 }
+                if (StrStarts(wepclassname, "tf_weapon_jar") || // Throwables (Jarate, Mad Milk)
+                   StrEqual(wepclassname, "tf_weapon_cleaver")) // Flying Guillotine
+                    addthecrit = true;
             }
             if (class == TFClass_DemoMan && !IsValidEntity(GetPlayerWeaponSlot(client, TFWeaponSlot_Secondary)))
             {
