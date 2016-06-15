@@ -5485,7 +5485,7 @@ public Action:OnTakeDamage(client, &attacker, &inflictor, &Float:damage, &damage
                             }
                         }
                     }
-                    case 14, 201, 664,
+                    /*case 14, 201, 664,
                          230, 402, 526, 1098, 752, // 752,            // Non-stock weapons
                          792, 801, 851, 881, 890, 899, 908, 957, 966, // Botkillers
                          15000, 15007, 15019, 15023, 15033, 15059:    // Gunmettle weapons
@@ -5534,7 +5534,7 @@ public Action:OnTakeDamage(client, &attacker, &inflictor, &Float:damage, &damage
                             HaleRage -= RoundFloat(damage*3.0/2.0);
                             if (HaleRage < 0) HaleRage = 0;
                         }
-                    }
+                    }*/
                     case 355:
                     {
                         new Float:rage = 0.05*RageDMG;
@@ -5629,6 +5629,53 @@ public Action:OnTakeDamage(client, &attacker, &inflictor, &Float:damage, &damage
                     {
                         CreateTimer(0.1, Timer_StopTickle, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
                         RemoveCond(attacker, TFCond_Dazed);
+                    }
+                }
+                new String:wepclassname[32];
+                if (IsValidEdict(weapon))
+                    GetEdictClassname(weapon, wepclassname, sizeof(wepclassname));
+                if (StrStarts(wepclassname, "tf_weapon_sniperrifle"))
+                {
+                    if (!StrStarts(wepclassname, "tf_weapon_sniperrifle_") && 
+                        (wepindex != 230 && wepindex != 526 && wepindex != 752 && wepindex != 30665))
+                    {
+                        if (VSHRoundState != VSHRState_End)
+                        {
+                            new Float:chargelevel = (IsValidEntity(weapon) && weapon > MaxClients ? GetEntPropFloat(weapon, Prop_Send, "m_flChargedDamage") : 0.0);
+                            new Float:time = (GlowTimer > 10 ? 1.0 : 2.0);
+                            time += (GlowTimer > 10 ? (GlowTimer > 20 ? 1 : 2) : 4)*(chargelevel/100);
+                            SetEntProp(client, Prop_Send, "m_bGlowEnabled", 1);
+                            GlowTimer += RoundToCeil(time);
+                            if (GlowTimer > 30.0) GlowTimer = 30.0;
+                        }
+                    }
+                    if (wepindex == 752 && VSHRoundState != VSHRState_End)
+                    {
+                        new Float:chargelevel = (IsValidEntity(weapon) && weapon > MaxClients ? GetEntPropFloat(weapon, Prop_Send, "m_flChargedDamage") : 0.0);
+                        new Float:add = 10 + (chargelevel / 10);
+                        if (TF2_IsPlayerInCondition(attacker, TFCond:46)) add /= 3;
+                        new Float:rage = GetEntPropFloat(attacker, Prop_Send, "m_flRageMeter");
+                        SetEntPropFloat(attacker, Prop_Send, "m_flRageMeter", (rage + add > 100) ? 100.0 : rage + add);
+                    }
+                    if (!(damagetype & DMG_CRIT))
+                    {
+                        new bool:ministatus = (TF2_IsPlayerInCondition(attacker, TFCond_CritCola) || TF2_IsPlayerInCondition(attacker, TFCond_Buffed));
+
+                        damage *= (ministatus) ? 2.222222 : 3.0;
+
+                        if (wepindex == 230)
+                        {
+                            HaleRage -= RoundFloat(damage/2.0);
+                            if (HaleRage < 0) HaleRage = 0;
+                        }
+
+                        return Plugin_Changed;
+                    }
+                    else if (wepindex == 230)
+                    {
+                        HaleRage -= RoundFloat(damage*3.0/2.0);
+                        if (HaleRage < 0)
+                            HaleRage = 0;
                     }
                 }
                 //VoiDeD's Caber-backstab code. To be added with a few special modifications in 1.40+
