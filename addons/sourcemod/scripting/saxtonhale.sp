@@ -3084,7 +3084,7 @@ public Action:MakeNoHale(Handle:hTimer, any:clientid)
                 if (GetEntProp(weapon, Prop_Send, "m_iEntityQuality") != 10)
                 {
                     TF2_RemoveWeaponSlot(client, TFWeaponSlot_Primary);
-                    SpawnWeapon(client, "tf_weapon_syringegun_medic", 17, 1, 10, "17 ; 0.05 ; 144 ; 1");
+                    SpawnWeapon(client, "tf_weapon_syringegun_medic", 17, 1, 10, "17 ; 0.05 ; 144 ; 1.0 ; 792 ; 1.2");
                 }
             }
         }
