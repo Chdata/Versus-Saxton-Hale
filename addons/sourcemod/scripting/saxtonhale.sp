@@ -2778,6 +2778,22 @@ public Action:MakeHale(Handle:hTimer)
             //AcceptEntityInput(ent, "kill");
         }
     }
+    ent = -1;
+    while ((ent = FindEntityByClassname2(ent, "tf_wearable_razorback")) != -1)
+    {
+        if (GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == Hale)
+        {
+            TF2_RemoveWearable(Hale, ent);
+        }
+    }
+    ent = -1;
+    while ((ent = FindEntityByClassname2(ent, "tf_wearable_campaign_item")) != -1)
+    {
+        if (GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == Hale)
+        {
+            TF2_RemoveWearable(Hale, ent);
+        }
+    }
     EquipSaxton(Hale);
 
     if (VSHRoundState >= VSHRState_Waiting && GetClientClasshelpinfoCookie(Hale))
@@ -2873,6 +2889,10 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
         case 43, 239, 1100, 1084: // GRU
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "107 ; 1.5 ; 1 ; 0.5 ; 128 ; 1 ; 191 ; -7", true);
+        }
+        case 231: //Darwin's Danger Shield
+        {
+            hItemOverride = PrepareItemHandle(hItem, _, _, "26 ; 25.0");
         }
         case 415: // Reserve Shooter
         {
@@ -3109,11 +3129,6 @@ public Action:MakeNoHale(Handle:hTimer, any:clientid)
             {
                 TF2_RemoveWeaponSlot(client, TFWeaponSlot_Secondary);
                 SpawnWeapon(client, "tf_weapon_lunchbox_drink", 163, 1, 0, "144 ; 2");
-            }
-            case 57:
-            {
-                TF2_RemoveWeaponSlot(client, TFWeaponSlot_Secondary);
-                SpawnWeapon(client, "tf_weapon_smg", 16, 1, 0, "");
             }
             case 265:
             {
@@ -4511,7 +4526,7 @@ public Action:DoTaunt(client, const String:command[], argc)
                 strcopy(s, PLATFORM_MAX_PATH, BunnyRage[GetRandomInt(1, sizeof(BunnyRage)-1)]);
                 EmitSoundToAll(s, _, _, SNDLEVEL_TRAFFIC, SND_NOFLAGS, SNDVOL_NORMAL, 100, _, pos, NULL_VECTOR, false, 0.0);
                 TF2_RemoveWeaponSlot(client, TFWeaponSlot_Primary);
-                new weapon = SpawnWeapon(client, "tf_weapon_grenadelauncher", 19, 100, 5, "6 ; 0.1 ; 411 ; 150.0 ; 413 ; 1.0 ; 37 ; 0.0 ; 280 ; 17 ; 477 ; 1.0 ; 467 ; 1.0 ; 181 ; 2.0 ; 252 ; 0.7");
+                new weapon = SpawnWeapon(client, "tf_weapon_grenadelauncher", 19, 100, 5, "6 ; 0.1 ; 411 ; 150.0 ; 413 ; 1.0 ; 37 ; 0.0 ; 280 ; 17 ; 477 ; 1.0 ; 467 ; 1.0 ; 252 ; 0.7");
                 SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
                 SetEntProp(weapon, Prop_Send, "m_iClip1", 50);
 //              new vm = CreateVM(client, ReloadEggModel);
@@ -5603,6 +5618,7 @@ public Action:OnTakeDamage(client, &attacker, &inflictor, &Float:damage, &damage
                         if (damagecustom == TF_CUSTOM_HEADSHOT)
                         {
                             damage = 85.0;
+                            damagetype &= ~DMG_SLOWBURN; //Don't use damage falloff
                             return Plugin_Changed;
                         }
                     }
@@ -7820,6 +7836,54 @@ stock bool:RemovePlayerBack(client, indices[], len)
 
     edict = MaxClients + 1;
 
+    while ((edict = FindEntityByClassname2(edict, "tf_wearable_razorback")) != -1)
+    {
+        decl String:netclass[32];
+
+        if (GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearableRazorback"))
+        {
+            new idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+
+            if (GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+            {
+                for (new i = 0; i < len; i++)
+                {
+                    if (idx == indices[i])
+                    {
+                        TF2_RemoveWearable(client, edict);
+                        bReturn = true;
+                    }
+                }
+            }
+        }
+    }
+
+    edict = MaxClients + 1;
+
+    while ((edict = FindEntityByClassname2(edict, "tf_wearable_campaign_item")) != -1)
+    {
+        decl String:netclass[32];
+
+        if (GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearableCampaignItem"))
+        {
+            new idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+
+            if (GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+            {
+                for (new i = 0; i < len; i++)
+                {
+                    if (idx == indices[i])
+                    {
+                        TF2_RemoveWearable(client, edict);
+                        bReturn = true;
+                    }
+                }
+            }
+        }
+    }
+
+    edict = MaxClients + 1;
+
     while ((edict = FindEntityByClassname2(edict, "tf_powerup_bottle")) != -1)
     {
         decl String:netclass[32];
@@ -7861,6 +7925,52 @@ stock FindPlayerBack(client, indices[], len)
         decl String:netclass[32];
 
         if (GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearable"))
+        {
+            new idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+
+            if (GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+            {
+                for (new i = 0; i < len; i++)
+                {
+                    if (idx == indices[i])
+                    {
+                        return edict;
+                    }
+                }
+            }
+        }
+    }
+
+    edict = MaxClients + 1;
+
+    while ((edict = FindEntityByClassname2(edict, "tf_wearable_razorback")) != -1)
+    {
+        decl String:netclass[32];
+
+        if (GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearableRazorback"))
+        {
+            new idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
+
+            if (GetEntPropEnt(edict, Prop_Send, "m_hOwnerEntity") == client && !GetEntProp(edict, Prop_Send, "m_bDisguiseWearable"))
+            {
+                for (new i = 0; i < len; i++)
+                {
+                    if (idx == indices[i])
+                    {
+                        return edict;
+                    }
+                }
+            }
+        }
+    }
+
+    edict = MaxClients + 1;
+
+    while ((edict = FindEntityByClassname2(edict, "tf_wearable_campaign_item")) != -1)
+    {
+        decl String:netclass[32];
+
+        if (GetEntityNetClass(edict, netclass, sizeof(netclass)) && StrEqual(netclass, "CTFWearableCampaignItem"))
         {
             new idx = GetEntProp(edict, Prop_Send, "m_iItemDefinitionIndex");
 
