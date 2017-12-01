@@ -2850,6 +2850,10 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "259 ; 1 ; 252 ; 0.25");
         }
+        case 307: //Caber
+        {
+            hItemOverride = PrepareItemHandle(hItem, _, _, "15 ; 0.0", true);
+        }
         case 220: // Shortstop - Effects are no longer 'only while active'. Otherwise acts like post-gunmettle shortstop.
         {
             hItemOverride = PrepareItemHandle(hItem, _, _, "525 ; 1 ; 526 ; 1.2 ; 533 ; 1.4 ; 534 ; 1.4 ; 328 ; 1 ; 241 ; 1.5", true);
@@ -2914,8 +2918,19 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
                 }
             }
         }
+        case TFClass_DemoMan:
+        {
+            if (StrStarts(classname, "tf_weapon_sword", false) || StrStarts(classname, "tf_weapon_katana", false))
+            {
+                hItemOverride = PrepareItemHandle(hItem, _, _, "547 ; 0.75 ; 199 ; 0.75"); // All Sword weapons are returned (close) to the old default switch time of 0.67s
+            }
+        }
         case TFClass_Soldier: // TODO if (TF2_GetPlayerClass(client) == TFClass_Soldier && (strncmp(classname, "tf_weapon_rocketlauncher", 24, false) == 0 || strncmp(classname, "tf_weapon_particle_cannon", 25, false) == 0 || strncmp(classname, "tf_weapon_shotgun", 17, false) == 0 || strncmp(classname, "tf_weapon_raygun", 16, false) == 0))
         {
+            if (StrStarts(classname, "tf_weapon_katana", false))
+            {
+                hItemOverride = PrepareItemHandle(hItem, _, _, "547 ; 0.75 ; 199 ; 0.75"); // All Sword weapons are returned (close) to the old default switch time of 0.67s
+            }
             if (StrStarts(classname, "tf_weapon_shotgun", false) || GunmettleToIndex(iItemDefinitionIndex) == TFWeapon_Shotgun)
             {
                 hItemOverride = PrepareItemHandle(hItem, _, _, "135 ; 0.6 ; 265 ; 99999.0"); // Soldier shotguns get 40% rocket jump dmg reduction     ; 265 ; 99999.0
@@ -2938,7 +2953,7 @@ public Action:TF2Items_OnGiveNamedItem(client, String:classname[], iItemDefiniti
             //Medic mediguns
             if (StrStarts(classname, "tf_weapon_medigun", false) || GunmettleToIndex(iItemDefinitionIndex) == TFWeapon_Medigun)
             {
-                hItemOverride = PrepareItemHandle(hItem, _, _, "10 ; 1.25 ; 178 ; 0.75 ; 18 ; 0", true);
+                hItemOverride = PrepareItemHandle(hItem, _, _, "10 ; 1.25 ; 18 ; 0", true);
             }
         }
 #endif
@@ -3182,7 +3197,7 @@ public Action:MakeNoHale(Handle:hTimer, any:clientid)
         if (mediquality != 10)
         {
             TF2_RemoveWeaponSlot(client, TFWeaponSlot_Secondary);
-            weapon = SpawnWeapon(client, "tf_weapon_medigun", 35, 5, 10, "18 ; 0.0 ; 10 ; 1.25 ; 178 ; 0.75");  //200 ; 1 for area of effect healing    // ; 178 ; 0.75 ; 128 ; 1.0 Faster switch-to
+            weapon = SpawnWeapon(client, "tf_weapon_medigun", 35, 5, 10, "18 ; 0.0 ; 10 ; 1.25");  //200 ; 1 for area of effect healing    // ; 178 ; 0.75 ; 128 ; 1.0 Faster switch-to
             if (GetIndexOfWeaponSlot(client, TFWeaponSlot_Melee) == 142)
             {
                 SetEntityRenderMode(weapon, RENDER_TRANSCOLOR);
@@ -4402,6 +4417,10 @@ public TF2_OnConditionAdded(client, TFCond:cond)
                     TF2_RemoveCondition(client, cond);
                 }
             }
+            case TFCond_CritMmmph: //Phlogistinator Activation
+            {
+                AddPlayerHealth(client, 175);
+            }
         }
     }
 }
@@ -5578,6 +5597,12 @@ public Action:OnTakeDamage(client, &attacker, &inflictor, &Float:damage, &damage
                     case 214: // Powerjack
                     {
                         AddPlayerHealth(attacker, 25, 50);
+                        RemoveCond(attacker, TFCond_OnFire);
+                        return Plugin_Changed;
+                    }
+                    case 310: // Warrior's Spirit
+                    {
+                        AddPlayerHealth(attacker, 50, 150);
                         RemoveCond(attacker, TFCond_OnFire);
                         return Plugin_Changed;
                     }
