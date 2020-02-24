@@ -2,40 +2,40 @@
 {
 	"vsh_needmoreplayers"
 	{
-		"en"    "VS Saxton Hale Mode is disabled. Need more players to start!"
+		"en"    "VS Saxton Hale is disabled. Need more players to start!"
 	}
 	"vsh_open_menu"
 	{
-		"en"	"Type {olive}/hale{default} to open the VS Saxton Hale Menu!"
+		"en"	"Type {grey}/hale{white} to open the VS Saxton Hale Menu!"
 	}
 	"vsh_open_ach"
 	{
-		"en"	"Type {olive}/haleach{default} for achievements. (Data from 9th was restored to 8th September)"
+		"en"	"Type {grey}/haleach{white} for achievements. (Data from 9th was restored to 8th September)"
 	}
 	"vsh_nextmap"
 	{
 		"#format" "{1:s}"
-		"en"	"{olive}VS Saxton Hale Mode{default} will be played on {olive}{1}{default}"
+		"en"	"{grey}VS Saxton Hale Mode{white} will be played on {grey}{1}{white}"
 	}
 	"vsh_hale_is_alive"
 	{
 		"#format" "{1:N},{2:i},{3:i}"
-		"en"	"Saxton Hale ({1}) had {2} (of {3}) health left."
+		"en"	"Saxton Hale ({1}) had {2} of {3} health left."
 	}
 	"vsh_vagineer_is_alive"
 	{
 		"#format" "{1:N},{2:i},{3:i}"
-		"en"	"The Vagineer ({1}) had {2} (of {3}) health left."
+		"en"	"The Vagineer ({1}) had {2} of {3} health left."
 	}
 	"vsh_hhh_is_alive"
 	{
 		"#format" "{1:N},{2:i},{3:i}"
-		"en"	"The Horseless Headless Horsemann Jr. ({1}) had {2} (of {3}) health left."
+		"en"	"The Horseless Headless Horsemann Jr. ({1}) had {2} of {3} health left."
 	}
 	"vsh_cbs_is_alive"
 	{
 		"#format" "{1:N},{2:i},{3:i}"
-		"en"	"The Christian Brutal Sniper ({1}) had {2} (of {3}) health left."
+		"en"	"The Christian Brutal Sniper ({1}) had {2} of {3} health left."
 	}
 	"vsh_hale_show_hp"
 	{
@@ -60,31 +60,31 @@
 	"vsh_hale_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"Saxton Hale's current health is: {1} of {2}"
+		"en"	"Saxton Hale's HP: {1} of {2}"
 	}
 	"vsh_vagineer_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"The Vagineer's current health is: {1} of {2}"
+		"en"	"The Vagineer's HP: {1} of {2}"
 	}
 	"vsh_hhh_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"The Horseless Headless Horsemann Jr.'s current health is: {1} of {2}"
+		"en"	"The Horseless Headless Horsemann Jr.'s HP: {1} of {2}"
 	}
 	"vsh_cbs_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"The Christian Brutal Sniper's current health is: {1} of {2}"
+		"en"	"The Christian Brutal Sniper's HP: {1} of {2}"
 	}
 	"vsh_can_not_see_hp"
 	{
-		"en"	"You can no longer check health in this round (3 checks per round)."
+		"en"	"You can no longer check his health this round (3 checks per round)."
 	}
 	"vsh_wait_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"You cannot see his HP now (wait {1} seconds). Last known health was {2}."
+		"en"	"You cannot check his health now (wait {1} seconds). Last known health was {2}."
 	}
 	"vsh_hale_select_text"
 	{
@@ -93,7 +93,7 @@
 	"vsh_damage"
 	{
 		"#format" "{1:i}"
-		"en"	"Damage dealt: {1}"
+		"en"	"Damage Dealt: {1}"
 	}
 	"vsh_damage_own"
 	{
@@ -136,7 +136,7 @@
 	}
 	"vsh_top_3"
 	{
-		"en"	"Most damage dealt by:"
+		"en"	"Top Damage"
 	}
 	"vsh_start_hale"
 	{
@@ -165,7 +165,7 @@
 	"vsh_health"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"Health: {1} of {2}"
+		"en"	"Health: {1} / {2}"
 	}
 	"vsh_do_rage"
 	{
@@ -174,7 +174,7 @@
 	"vsh_rage_meter"
 	{
 		"#format" "{1:i}"
-		"en"	"RAGE meter: {1} percent!"
+		"en"	"RAGE Meter: {1}%%"
 	}
 	"vsh_super_duper_jump"
 	{
@@ -183,20 +183,20 @@
 	"vsh_teleport_status"
 	{
 		"#format" "{1:i}"
-		"en"	"Teleport charge: {1} percent. At 100 percent, stand up to teleport."
+		"en"	"Teleport Charge: {1}%%. At 100%%, stand up to teleport."
 	}
 	"vsh_jump_status"
 	{
 		"#format" "{1:i}"
-		"en"	"Jump charge: {1} percent. Look up and stand up to use super-jump."
+		"en"	"Jump Charge: {1}%%. Look up and stand up to use super-jump."
 	}
 	"vsh_teleport_status_2"
 	{
-		"en"	"Teleporter will be ready again in:"
+		"en"	"Teleporter in:"
 	}
 	"vsh_jump_status_2"
 	{
-		"en"	"Super Jump will be ready again in:"
+		"en"	"Super Jump in:"
 	}
 	"vsh_help_hale"
 	{
@@ -220,15 +220,15 @@
 	}
 	"vsh_help_scout"
 	{
-		"en"	"The Crit-a-Cola grants criticals instead of minicrits.\nThe Fan O' War removes 5%% rage on hit.\nPistols gain minicrits.\nCleaver gains crits.\nCandycane drops a mini health pack on hit.\nSoda Popper and BFB are replaced with Scatterguns, Bonk! is replaced with Crit-a-Cola.\nWrap Assassin has 2 ornaments."
+		"en"	"The Crit-a-Cola grants criticals instead of minicrits.\nThe Fan O' War removes 5pct rage on hit.\nPistols gain minicrits.\nCleaver gains crits.\nCandycane drops a mini health pack on hit.\nSoda Popper and BFB are replaced with Scatterguns, Bonk! is replaced with Crit-a-Cola.\nWrap Assassin has 2 ornaments."
 	}
 	"vsh_help_soldier"
 	{
-		"en"    "The Battalion's Backup will fill to 100%% on taking a hit from boss.\nThe Half-Zatoichi heals 35HP on hit and can overheal to +25. Honorbound is removed on hit.\nBoot weapons lessen fall damage by 90%%.\nAll shotguns minicrit midair bosses, and reduce self rocket jump damage by 40%%.\nDirect Hit crits instead of minicrit.\nMantreads boost rocket jumps and deal 1024 stomp damage.\nAirstrike gains an extra clip every 200 damage dealt to Hale.\nMarket Gardens deal massive damage."
+		"en"    "The Battalion's Backup will fill to 100pct on taking a hit from Hale. Its buff causes nearby teammates to take very little damage.\nThe Half-Zatoichi heals 35HP on hit and can overheal to +25. Honorbound is removed on hit.\nBoot weapons lessen fall damage by 90pct.\nAll shotguns minicrit midair bosses, and reduce self rocket jump damage by 40pct.\nDirect Hit crits where it would minicrit.\nReserve Shooter has faster weapon switch and slight damage buff.\nMantreads increase rocket jump velocity and deal 1024 stomp damage.\nAirstrike gains an extra clip every 200 damage dealt to Hale.\nMarket Gardens deal near backstab damage."
 	}
 	"vsh_help_pyro"
 	{
-		"en"	"The Axtinguisher acts like the Fire Axe.\nFlare Gun, Detonator, and Scorch Shot are replaced by the MegaDetonator.\nAirblasting the boss builds rage and lengthens the Vagineer's uber.\nThird Degree gains 10%% uber for medics on hit.\nPhlog is invincible during activation, and has a 75%% defence buff during Crit Mmmph,\nbut disables flare crits at all times, and has a 50%% damage penalty when Mmmph isn't active."
+		"en"	"The Axtinguisher acts like the Fire Axe.\nThe Flare Gun, Detonator, and Scorch Shot are replaced by the MegaDetonator, all Flare guns are critboosted.\nAirblasting the boss builds rage and lengthens the Vagineer's uber.\nThird Degree gains 10pct uber for healers on hit.\nPhlog will grant invulnerability while activating Mmmph, and has a defence buff during Crit Mmmph,\nbut disables flare crits at all time, and has a 50pct damage penalty when Mmmph isn't active."
 	}
 	"vsh_help_demo"
 	{
@@ -236,7 +236,7 @@
 	}
 	"vsh_help_heavy"
 	{
-		"en"	"Natascha, the KGB, and the Fists of Steel are replaced with the\nMinigun, Gloves of Running, and Fists, respectively.\nThe Gloves of Running are quite quick but cause you to lose more health.\nThe Holiday Punch will remove any stun on you if you hit Hale while stunned, they are only minicrit boosted."
+		"en"	"Natascha, the KGB, and the Fists of Steel are replaced with the\nMinigun, Gloves of Running, and Fists, respectively.\nThe Gloves of Running are quite quick but cause you to lose more health.\nThe Holiday Punch will remove any stun on you if you hit Hale while stunned, they are only minicrit boosted.."
 	}
 	"vsh_help_eggineer"
 	{
@@ -244,15 +244,15 @@
 	}
 	"vsh_help_medic"
 	{
-		"en"	"All Mediguns are identical: +25%% Ubercharge rate, +25%% Faster weapon switch, follow heal target like the Quickfix.\nUbercharge: Kritz+Uber+Quickfix. Charge starts at 41%% at the start of the round, then 31%% after each activation.\nCharge is increased to 150%% after activation.\nSyringe Guns: on hit: +5%% to ubercharge, Overdose speed effect.\nCrossbow: critboosted, 1.45x damage, +15%% uber on hit."
+		"en"	"All Mediguns are identical: +25pct Ubercharge rate, +25pct Faster weapon switch, follow heal target like the Quickfix.\nUbercharge: Kritz+Uber+Quickfix. Charge starts at 41pct at the start of the round, then 31pct after each activation.\nCharge is increased to 150pct after activation.\nSyringe Guns: on hit: +5pct to ubercharge, Overdose speed effect.\nCrossbow: critboosted, 1.45x damage, +15pct uber on hit."
 	}
 	"vsh_help_sniper"
 	{
-		"en"	"Jarate removes 8%% rage.\nSMGs have crits.\nRazorback is replaced with SMG.\nAll rifles do 3x dmg bodyshots.\nSniper Rifle causes the boss to glow. Glow time scales with charge.\nHitman's Heatmaker gains focus from dmg dealt.\nSydney Sleeper doesn't apply jarate to the boss, but adds only half its dmg to the boss's rage meter.\nBazaar Bargain is disabled.\nAll sniper melees climbs walls, but block healing while in use.\nCozy Camper has an SMG that deals -15%% damage, 1.5s bleed on hit and has no crits."
+		"en"	"Jarate removes 8pct rage.\nAll SMGs are critboosted.\nRazorback is replaced with SMG.\nAll rifles deal 3x damage on non-crits.\nSniper Rifle causes the boss to glow. Glow time scales with charge.\nHitman's Heatmaker gains focus based on damage dealt.\nSydney Sleeper doesn't apply jarate to the boss, but adds only half its damage to the boss's rage meter.\nBazaar Bargain is disabled.\nAll sniper melees climbs walls, but blocks healing while in use.\nCozy Camper grants a bonus SMG that deals -15pct damage, 1.5s bleed on hit and is not critboosted."
 	}
 	"vsh_help_spie"
 	{
-		"en"	"Backstabs do great dmg.\nCloaknDagger is blocked.\nRevolvers minicrit.\nYER has silent decloak and no disguises.\nKunai backstabs give +180hp, up to 270. Spawn with 65hp.\nAmbassador headshots do 255 damage.\nBig Earner backstab gains full cloak + 3s speed boost.\nDiamondback backstab gains 2 revenge crits for 200dmg each.\nCloak doesn't speed buff.\nCloaks reduce dmg by 90%%.\nDeadringer reduces melee and arrow damage to 62, but not mantread stomps.\nNormal watch reduces to 85."
+		"en"	"Backstab does great damage vs the boss.\nCloaknDagger replaced with normal watch.\nAll revolvers minicrit.\nYour Eternal Reward has silent decloak and no disguises.\nKunai backstabs give +180hp, up to a max of 270, but start you with 65hp.\nAmbassador headshots do 2.5x damage.\nBig Earner gains full cloak on backstab and a 3s speed boost.\nDiamondback gains 2 revenge crits on backstab that do 2x damage.\nSpeed buff on cloak has been removed.\nAll spy watches reduce damage by 90pct.\nDeadringer reduces melee and arrow damage to 62, but not mantread stomps.\nNormal watch reduces to 85."
 	}
 	"vsh_help_melee"
 	{
@@ -260,7 +260,7 @@
 	}
 	"vsh_thequeue"
 	{
-		"en"	"Saxton Hale's Queue:"
+		"en"	"Saxton Hale's Queue"
 	}
 	"vsh_curret_hale_is"
 	{
@@ -268,23 +268,23 @@
 	}
 	"vsh_menu_1"
 	{
-		"en"	"What do you want, sir?"
+		"en"	"[VSH] Main Menu\n \n"
 	}
 	"vsh_menu_2"
 	{
-		"en"	"Show Hale's health (/halehp)"
+		"en"	"Hale's Health (!halehp)"
 	}
 	"vsh_menu_3"
 	{
-		"en"	"Show help about the mode (/halehelp)"
+		"en"	"Help (!halehelp)"
 	}
 	"vsh_menu_4"
 	{
-		"en"	"What's new?(/halenew)"
+		"en"	"What's New (!halenew)"
 	}
 	"vsh_menu_5"
 	{
-		"en"	"Who is the next Hale? (/halenext)"
+		"en"	"Hale Queue (!halenext)"
 	}
 	"vsh_menu_exit"
 	{
@@ -292,7 +292,7 @@
 	}
 	"vsh_whatsnew"
 	{
-		"en"	"What's new:"
+		"en"	"What's New:"
 	}
 	"vsh_help_mode"
 	{
@@ -316,7 +316,7 @@
 	}
 	"vsh_menu_7"
 	{
-		"en"	"Show help about your class (/haleclass)"
+		"en"	"Class Info (!haleclass)"
 	}
 	"vsh_damage_fx"
 	{
@@ -328,7 +328,7 @@
 	}
 	"vsh_scores"
 	{
-		"en"	"Score for this round:"
+		"en"	"Round Score:"
 	}
 	"vsh_airblast"
 	{
@@ -337,12 +337,12 @@
 	}
 	"vsh_your_points"
 	{
-		"en"    "Your queue points:"
+		"en"    "Queue Points:"
 	}
 	"vsh_add_points"
 	{
 		"#format" "{1:i}"
-		"en"    "You get {1} queue points."
+		"en"    "You earned {1} queue points."
 	}
 	"vsh_to0"
 	{
@@ -354,11 +354,11 @@
 	}	
 	"vsh_to0_done"
 	{
-		"en"	"You have reset your queue points to {olive}0{default}"
+		"en"	"You have reset your queue points to {grey}0{white}."
 	}
 	"vsh_to0_near"
 	{
-		"en"	"You are going to be Hale soon! Type {olive}/halenext{default} to check/reset your queue points."
+		"en"	"You are going to be Hale soon! Type {grey}/halenext{white} to check or reset your queue points."
 	}
 	"vsh_queue_disabled"
 	{
@@ -396,32 +396,32 @@
 	}
 	"vsh_menu_8"
 	{
-		"en"	"Music Options (/halemusic)"
+		"en"	"Music Options (!halemusic)"
 	}
 	"vsh_menu_9"
 	{
-		"en"	"Voice Options (/halevoice)"
+		"en"	"Voice Options (!halevoice)"
 	}
 	"vsh_menu_9a"
 	{
-		"en"	"Show/Hide Class Info (/haleclassinfotoggle)"
+		"en"	"Toggle Class Info (!haleclassinfotoggle)"
 	}
 	"vsh_menu_10"
 	{
-		"en"	"VSH Achievements (/haleach)"
+		"en"	"Achievements (!haleach)"
 	}
 	"vsh_menu_11"
 	{
-		"en"	"VSH Achievement Stats (/haleach_stats)"
+		"en"	"Achievement Stats (!haleach_stats)"
 	}
 	"vsh_classinfo"
 	{
 		"#format" "{1:s}"
-		"en"	"You've turned {1} the VS Saxton Hale classinfo."
+		"en"	"You've turned {1} the VS Saxton Hale class information."
 	}
 	"vsh_last_update"
 	{
 		"#format" "{1:s},{2:s}"
-		"en"	"What's new in v{olive}{1}{default} ({olive}{2}{default})? Type {olive}/halenew{default}"
+		"en"	"What's new in v{grey}{1}{white} ({grey}{2}{white})? Type {grey}/halenew{white}"
 	}
 }
