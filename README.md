@@ -40,6 +40,7 @@ Find the line `#define EASTER_BUNNY_ON` in `saxtonhale.sp`, put a ```//``` in fr
 'Legacy Mediguns' being Medics granted a custom Kritzkrieg instead of overriding all Medigun attributes.
 Find the line `#define OVERRIDE_MEDIGUNS_ON` in `saxtonhale.sp`, put a ```//``` in front of the ```#define```, and recompile the plugin using include files from a recent snapshot of [SourceMod](http://www.sourcemod.net).
 
+#### Compiling
 TF2Items, Sourcemod 1.6.3 or higher, and morecolors.inc are **required** to be able to compile it.
 
 If you use them, the Steamtools, TF2Attributes, RTD, and Goomba includes must also be used.
