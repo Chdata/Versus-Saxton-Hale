@@ -31,10 +31,12 @@ The following files are no longer needed and can be deleted
 * `gamedata/equipwearable.txt`
 * `gamedata/saxtonhale.txt`
 
-### To disable the Easter Bunny
+---
+
+#### Disable the Easter Bunny
 Find the line `#define EASTER_BUNNY_ON` in `saxtonhale.sp`, put a ```//``` in front of the ```#define```, and recompile the plugin using include files from a recent snapshot of [SourceMod](http://www.sourcemod.net).
 
-### To restore legacy Mediguns
+#### Restore Legacy Mediguns
 'Legacy Mediguns' being Medics granted a custom Kritzkrieg instead of overriding all Medigun attributes.
 Find the line `#define OVERRIDE_MEDIGUNS_ON` in `saxtonhale.sp`, put a ```//``` in front of the ```#define```, and recompile the plugin using include files from a recent snapshot of [SourceMod](http://www.sourcemod.net).
 
