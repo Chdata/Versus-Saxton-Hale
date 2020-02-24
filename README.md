@@ -1,17 +1,15 @@
 Versus Saxton Hale
 ==================
 
-The precursor to [FF2](https://github.com/50DKP/FF2-Official).
+The predecessor to [Freak Fortress](https://github.com/50DKP/FF2-Official).
 
-[Visit the forum thread!](https://forums.alliedmods.net/showthread.php?t=244209)
+### Installing
+- Copy the `addons` folder to the server's `tf/` folder.  
+- The `scripting` folder within is unnecessary unless you are a modifying the gamemode.  
 
-###For first/fresh installs
-Copy the `addons` folder to the server's `tf/` folder.  
-The `scripting` folder within is entirely unnecessary unless you are a modder or want to disable the easter boss.  
-
-###For people updating to the latest version
-Make sure you are updated to Sourcemod 1.6.3 or greater. v1.50+ is now incompatible with older versions.  
-Generally, with Team Fortress 2, Valve updates say you almost always have to use the latest [SM snapshots](http://www.sourcemod.net/snapshots.php) anyway.  
+### Updating
+- Make sure you are updated to Sourcemod 1.6.3 or greater. v1.50+ is now incompatible with older versions.  
+- Generally, with Team Fortress 2, Valve updates say you almost always have to use the latest [SM snapshots](http://www.sourcemod.net/snapshots.php) anyway.  
 
 Also be sure to install [TF2Attributes](https://forums.alliedmods.net/showthread.php?t=210221).
 
@@ -35,10 +33,10 @@ The following files are no longer needed and can be deleted:
 * `gamedata/equipwearable.txt`
 * `gamedata/saxtonhale.txt`
 
-###To disable the Easter Bunny
+### To disable the Easter Bunny
 Find the line `#define EASTER_BUNNY_ON` in `saxtonhale.sp`, put a ```//``` in front of the ```#define```, and recompile the plugin using include files from a recent snapshot of [SourceMod](http://www.sourcemod.net).
 
-###To restore legacy Mediguns
+### To restore legacy Mediguns
 'Legacy Mediguns' being Medics granted a custom Kritzkrieg instead of overriding all Medigun attributes.
 Find the line `#define OVERRIDE_MEDIGUNS_ON` in `saxtonhale.sp`, put a ```//``` in front of the ```#define```, and recompile the plugin using include files from a recent snapshot of [SourceMod](http://www.sourcemod.net).
 
