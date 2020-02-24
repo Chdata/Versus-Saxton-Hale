@@ -7306,7 +7306,7 @@ public Action:ClasshelpinfoSetting(client)
     if (!g_bAreEnoughPlayersPlaying)
         return Plugin_Handled;
     new Handle:panel = CreatePanel();
-    SetPanelTitle(panel, "Turn the VS Saxton Hale class info...");
+    SetPanelTitle(panel, "Turn the VS Saxton Hale Class Info");
     DrawPanelItem(panel, "On");
     DrawPanelItem(panel, "Off");
     SendPanelToClient(panel, client, ClasshelpinfoTogglePanelH, 9001);
