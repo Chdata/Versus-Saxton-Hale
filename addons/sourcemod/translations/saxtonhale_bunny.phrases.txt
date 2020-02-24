@@ -3,7 +3,7 @@
 	"vsh_bunny_is_alive"
 	{
 		"#format" "{1:N},{2:i},{3:i}"
-		"en"	"The Easter Bunny ({1}) had {2} (of {3}) health left."
+		"en"	"The Easter Bunny ({1}) had {2} of {3} health left."
 	}
 	"vsh_bunny_show_hp"
 	{
@@ -13,7 +13,7 @@
 	"vsh_bunny_hp"
 	{
 		"#format" "{1:i},{2:i}"
-		"en"	"The Easter Bunny's current health is: {1} of {2}"
+		"en"	"The Easter Bunny's HP: {1} of {2}"
 	}
 	"vsh_start_bunny"
 	{
