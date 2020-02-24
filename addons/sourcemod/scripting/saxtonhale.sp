@@ -14,12 +14,9 @@
 #include <tf2_stocks>
 #include <tf2items>
 #include <regex>
-#if SOURCEMOD_V_MINOR > 7
-  #pragma newdecls required
-#endif
+#include <morecolors>
 #include <clientprefs>
 #include <sdkhooks>
-#include <morecolors>
 #include <sourcemod>
 #include <nextmap>
 #include <saxtonhale>
@@ -1017,7 +1014,7 @@ public OnPluginEnd()
     if (!g_bReloadVSHOnRoundEnd && VSHRoundState == VSHRState_Active)
     {
         ServerCommand("mp_restartround 5");
-        CPrintToChatAll("{olive}[VSH]{default} The plugin has been unexpectedly unloaded!");
+        CPrintToChatAll("{grey}[VSH]{white} The plugin has been unexpectedly unloaded!");
     }
 }
 
@@ -1377,23 +1374,23 @@ public Action:Timer_Announce(Handle:hTimer)
         {
             case 1:
             {
-                CPrintToChatAll("{olive}[VSH]{default} VS Saxton Hale group: {olive}http://steamcommunity.com/groups/vssaxtonhale{default}");
+                CPrintToChatAll("{grey}[VSH]{white} VS Saxton Hale group: {grey}http://steamcommunity.com/groups/vssaxtonhale{white}");
             }
             case 3:
             {
-                CPrintToChatAll("{default}VSH v%s by {olive}Rainbolt Dash{default}, {olive}FlaminSarge{default}, & {lightsteelblue}Chdata{default}.", haleversiontitles[maxversion]);
+                CPrintToChatAll("{white}VSH v%s by {grey}Rainbolt Dash{white}, {grey}FlaminSarge{white}, & {lightsteelblue}Chdata{white}.", haleversiontitles[maxversion]);
             }
             case 5:
             {
                 announcecount = 0;
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_last_update", haleversiontitles[maxversion], haleversiondates[maxversion]);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_last_update", haleversiontitles[maxversion], haleversiondates[maxversion]);
             }
             default:
             {
 //              if (ACH_Enabled)
-//                  CPrintToChatAll("{olive}[VSH]{default} %t\n%t (experimental)", "vsh_open_menu", "vsh_open_ach");
+//                  CPrintToChatAll("{grey}[VSH]{white} %t\n%t (experimental)", "vsh_open_menu", "vsh_open_ach");
 //              else
-                    CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_open_menu");
+                    CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_open_menu");
             }
         }
     }
@@ -1682,7 +1679,7 @@ public Action:event_round_start(Handle:event, const String:name[], bool:dontBroa
     }
     if (GetClientCount() <= 1 || playing < 2)
     {
-        CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_needmoreplayers");
+        CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_needmoreplayers");
         g_bEnabled = false;
         VSHRoundState = VSHRState_Disabled;
         SetControlPoint(true);
@@ -1694,7 +1691,7 @@ public Action:event_round_start(Handle:event, const String:name[], bool:dontBroa
     }
     else if (RoundCount <= 0 && !GetConVarBool(cvarFirstRound))
     {
-        CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_first_round");
+        CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_first_round");
 
         g_bEnabled = false;
         VSHRoundState = VSHRState_Disabled;
@@ -1724,7 +1721,7 @@ public Action:event_round_start(Handle:event, const String:name[], bool:dontBroa
     new tHale = FindNextHale(see);
     if (tHale == -1)
     {
-        CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_needmoreplayers");
+        CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_needmoreplayers");
         g_bEnabled = false;
         VSHRoundState = VSHRState_Disabled;
         SetControlPoint(true);
@@ -1992,7 +1989,7 @@ public Action:event_round_end(Handle:event, const String:name[], bool:dontBroadc
         WriteFileString(fileh, s2, false);
         CloseHandle(fileh);
         SetNextMap(s2);
-        CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_nextmap", s2);
+        CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_nextmap", s2);
     }
     RoundCount++;
 
@@ -2056,7 +2053,7 @@ public Action:event_round_end(Handle:event, const String:name[], bool:dontBroadc
                 case VSHSpecial_CBS:        strcopy(translation, sizeof(translation), "vsh_cbs_is_alive");
                 default:                    strcopy(translation, sizeof(translation), "vsh_hale_is_alive");
             }
-            CPrintToChatAll("{olive}[VSH]{default} %t", translation, Hale, HaleHealth, HaleHealthMax);
+            CPrintToChatAll("{grey}[VSH]{white} %t", translation, Hale, HaleHealth, HaleHealthMax);
             SetHudTextParams(-1.0, 0.2, 10.0, 255, 255, 255, 255);
             for (new i = 1; i <= MaxClients; i++)
             {
@@ -2125,7 +2122,7 @@ public Action:event_round_end(Handle:event, const String:name[], bool:dontBroadc
                 SetGlobalTransTarget(i);
 //              if (numHaleKills < 2 && false) ShowHudText(i, -1, "%t\n1)%i - %s\n2)%i - %s\n3)%i - %s\n\n%t %i\n%t %i", "vsh_top_3", Damage[top[0]], s, Damage[top[1]], s1, Damage[top[2]], s2, "vsh_damage_fx", Damage[i], "vsh_scores", RoundFloat(Damage[i] / 600.0));
 //              else
-                ShowSyncHudText(i, infoHUD, "%t\n1)%i - %s\n2)%i - %s\n3)%i - %s\n\n%t %i\n%t %i", "vsh_top_3",
+                ShowSyncHudText(i, infoHUD, "%t\n#1] %i - %s\n#2] %i - %s\n#3] %i - %s\n\n%t %i\n%t %i", "vsh_top_3",
                     Damage[top[0]], s,
                     Damage[top[1]], s1,
                     Damage[top[2]], s2,
@@ -2170,7 +2167,7 @@ CalcScores()
             }
             else if (!IsFakeClient(i) && (GetEntityTeamNum(i) > _:TFTeam_Spectator))
             {
-                CPrintToChat(i, "{olive}[VSH]{default} %t", "vsh_add_points", 10);
+                CPrintToChat(i, "{grey}[VSH]{white} %t", "vsh_add_points", 10);
                 SetClientQueuePoints(i, GetClientQueuePoints(i)+10);
             }
         }
@@ -2503,7 +2500,7 @@ public Action:Timer_SkipHalePanel(Handle:hTimer)
         {
             if (!IsFakeClient(client))
             {
-                CPrintToChat(client, "{olive}[VSH]{default} %t", "vsh_to0_near");
+                CPrintToChat(client, "{grey}[VSH]{white} %t", "vsh_to0_near");
                 if (i == 0) SkipHalePanelNotify(client);
             }
             i++;
@@ -2538,8 +2535,8 @@ SkipHalePanelNotify(client) // , bool:newchoice = true
     Format(s, sizeof(s), "%t\nAlternatively, use !resetq.", "vsh_to0_near");
     CRemoveTags(s, sizeof(s));
 
-    ReplaceString(s, sizeof(s), "{olive}", "");
-    ReplaceString(s, sizeof(s), "{default}", "");
+    ReplaceString(s, sizeof(s), "{grey}", "");
+    ReplaceString(s, sizeof(s), "{white}", "");
 
     DrawPanelItem(panel, s);
     SendPanelToClient(panel, client, SkipHalePanelH, 30);
@@ -3369,36 +3366,36 @@ public Action:Command_GetHP(client)
             case VSHSpecial_Bunny:
             {
                 PriorityCenterTextAll(_, "%t", "vsh_bunny_hp", HaleHealth, HaleHealthMax);
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_bunny_hp", HaleHealth, HaleHealthMax);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_bunny_hp", HaleHealth, HaleHealthMax);
             }
             case VSHSpecial_Vagineer:
             {
                 PriorityCenterTextAll(_, "%t", "vsh_vagineer_hp", HaleHealth, HaleHealthMax);
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_vagineer_hp", HaleHealth, HaleHealthMax);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_vagineer_hp", HaleHealth, HaleHealthMax);
             }
             case VSHSpecial_HHH:
             {
                 PriorityCenterTextAll(_, "%t", "vsh_hhh_hp", HaleHealth, HaleHealthMax);
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_hhh_hp", HaleHealth, HaleHealthMax);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_hhh_hp", HaleHealth, HaleHealthMax);
             }
             case VSHSpecial_CBS:
             {
                 PriorityCenterTextAll(_, "%t", "vsh_cbs_hp", HaleHealth, HaleHealthMax);
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_cbs_hp", HaleHealth, HaleHealthMax);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_cbs_hp", HaleHealth, HaleHealthMax);
             }
             default:
             {
                 PriorityCenterTextAll(_, "%t", "vsh_hale_hp", HaleHealth, HaleHealthMax);
-                CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_hale_hp", HaleHealth, HaleHealthMax);
+                CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_hale_hp", HaleHealth, HaleHealthMax);
             }
         }
         HaleHealthLast = HaleHealth;
         SetNextTime(e_flNextHealthQuery, healthcheckused < 3 ? 20.0 : 80.0);
     }
     else if (RedAlivePlayers == 1)
-        CPrintToChat(client, "{olive}[VSH]{default} %t", "vsh_already_see");
+        CPrintToChat(client, "{grey}[VSH]{white} %t", "vsh_already_see");
     else
-        CPrintToChat(client, "{olive}[VSH]{default} %t", "vsh_wait_hp", GetSecsTilNextTime(e_flNextHealthQuery), HaleHealthLast);
+        CPrintToChat(client, "{grey}[VSH]{white} %t", "vsh_wait_hp", GetSecsTilNextTime(e_flNextHealthQuery), HaleHealthLast);
     return Plugin_Continue;
 }
 public Action:Command_MakeNextSpecial(client, args)
@@ -3413,12 +3410,12 @@ public Action:Command_MakeNextSpecial(client, args)
     decl String:name[64];
     if (!bSpecials)
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} This server isn't set up to use special bosses! Set the cvar hale_specials 1 in the VSH config to enable on next map!");
+        CReplyToCommand(client, "{grey}[VSH]{white} This server isn't set up to use special bosses! Set the cvar hale_specials 1 in the VSH config to enable on next map!");
         return Plugin_Handled;
     }
     if (args < 1)
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} Usage: hale_special <hale, vagineer, hhh, christian>");
+        CReplyToCommand(client, "{grey}[VSH]{white} Usage: hale_special <hale, vagineer, hhh, christian>");
         return Plugin_Handled;
     }
     GetCmdArgString(arg, sizeof(arg));
@@ -3451,10 +3448,10 @@ public Action:Command_MakeNextSpecial(client, args)
 #endif
     else
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} Usage: hale_special <hale, vagineer, hhh, christian>");
+        CReplyToCommand(client, "{grey}[VSH]{white} Usage: hale_special <hale, vagineer, hhh, christian>");
         return Plugin_Handled;
     }
-    CReplyToCommand(client, "{olive}[VSH]{default} Set the next Special to %s", name);
+    CReplyToCommand(client, "{grey}[VSH]{white} Set the next Special to %s", name);
     return Plugin_Handled;
 }
 public Action:Command_NextHale(client, args)
@@ -3470,7 +3467,7 @@ public Action:Command_HaleSelect(client, args)
 
     if (args < 1)
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} Usage: hale_select <target> [\"hidden\"]");
+        CReplyToCommand(client, "{grey}[VSH]{white} Usage: hale_select <target> [\"hidden\"]");
         return Plugin_Handled;
     }
 
@@ -3488,7 +3485,7 @@ public Action:Command_HaleSelect(client, args)
     }
     else
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} Target is not valid for being selected as the boss.");
+        CReplyToCommand(client, "{grey}[VSH]{white} Target is not valid for being selected as the boss.");
     }
 
     return Plugin_Handled;
@@ -3499,7 +3496,7 @@ public Action:Command_Points(client, args)
         return Plugin_Continue;
     if (args != 2)
     {
-        CReplyToCommand(client, "{olive}[VSH]{default} Usage: hale_addpoints <target> <points>");
+        CReplyToCommand(client, "{grey}[VSH]{white} Usage: hale_addpoints <target> <points>");
         return Plugin_Handled;
     }
     decl String:s2[MAX_DIGITS];
@@ -3535,7 +3532,7 @@ public Action:Command_Points(client, args)
         SetClientQueuePoints(target_list[i], GetClientQueuePoints(target_list[i])+points);
         LogAction(client, target_list[i], "\"%L\" added %d VSH queue points to \"%L\"", client, points, target_list[i]);
     }
-    CReplyToCommand(client, "{olive}[VSH]{default} Added %d queue points to %s", points, target_name);
+    CReplyToCommand(client, "{grey}[VSH]{white} Added %d queue points to %s", points, target_name);
     return Plugin_Handled;
 }
 StopHaleMusic(client)
@@ -3554,7 +3551,7 @@ public Action:Command_StopMusic(client, args)
         if (!IsClientInGame(i)) continue;
         StopHaleMusic(i);
     }
-    CReplyToCommand(client, "{olive}[VSH]{default} Stopped boss music.");
+    CReplyToCommand(client, "{grey}[VSH]{white} Stopped boss music.");
     return Plugin_Handled;
 }
 public Action:Command_Point_Disable(client, args)
@@ -3590,7 +3587,7 @@ stock ForceHale(admin, client, bool:hidden, bool:forever = false)
         NextHale = client;
     if (!hidden)
     {
-        CPrintToChatAllEx(client, "{olive}[VSH] {teamcolor}%N {default}%t", client, "vsh_hale_select_text");
+        CPrintToChatAllEx(client, "{grey}[VSH] {teamcolor}%N {white}%t", client, "vsh_hale_select_text");
     }
 }
 public OnClientPostAdminCheck(client)
@@ -3653,10 +3650,10 @@ public OnClientDisconnect(client)
                     Hale = tHale;
                     ChangeTeam(Hale, HaleTeam);
                     CreateTimer(0.1, MakeHale);
-                    CPrintToChat(Hale, "{olive}[VSH]{default} Surprise! You're on NOW!");
+                    CPrintToChat(Hale, "{grey}[VSH]{white} Surprise! You're on NOW!");
                 }
             }
-            CPrintToChatAll("{olive}[VSH]{default} %t", "vsh_hale_disconnected");
+            CPrintToChatAll("{grey}[VSH]{white} %t", "vsh_hale_disconnected");
         }
         else
         {
@@ -4317,7 +4314,7 @@ public Action:HaleTimer(Handle:hTimer)
             TeleportEntity(Hale, NULL_VECTOR, NULL_VECTOR, fVelocity);
             SetEntityGravity(Hale, 6.0);
             CreateTimer(2.0, Timer_GravityCat, GetClientUserId(Hale), TIMER_FLAG_NO_MAPCHANGE);
-            CPrintToChat(Hale, "{olive}[VSH]{default} %t", "vsh_used_weighdown");
+            CPrintToChat(Hale, "{grey}[VSH]{white} %t", "vsh_used_weighdown");
             WeighDownTimer = 0.0;
         }
     }
@@ -4572,7 +4569,7 @@ public Action:DoSuicide(client, const String:command[], argc)
     {
         if (client == Hale && !IsNextTime(e_flNextAllowBossSuicide))
         {
-            CPrintToChat(client, "Do not suicide as Hale. Use !resetq instead.");
+            CPrintToChat(client, "{grey}[VSH] {white}Do not suicide as Hale. Use !resetq before your turn instead.");
             return Plugin_Handled;
             //KickClient(client, "Next time, please remember to !hale_resetq");
             //if (VSHRoundState == VSHRState_Waiting) return Plugin_Handled;
@@ -4584,7 +4581,7 @@ public Action:DoSuicide2(client, const String:command[], argc)
 {
     if (g_bEnabled && client == Hale && !IsNextTime(e_flNextAllowBossSuicide))
     {
-        CPrintToChat(client, "You can't change teams this early.");
+        CPrintToChat(client, "{grey}[VSH] {white}You can't change teams this early.");
         return Plugin_Handled;
     }
     return Plugin_Continue;
@@ -5012,7 +5009,7 @@ public Action:Timer_Damage(Handle:hTimer, any:id)
 {
     new client = GetClientOfUserId(id);
     if (IsValidClient(client)) // IsValidClient(client, false)
-        CPrintToChat(client, "{olive}[VSH]{default} %t. %t %i",
+        CPrintToChat(client, "{grey}[VSH]{white} %t. %t %i",
             "vsh_damage", Damage[client],
             "vsh_scores", RoundFloat(Damage[client] / 600.0)
         );
@@ -6252,7 +6249,7 @@ public TurnToZeroPanelH(Handle:menu, MenuAction:action, param1, param2)
     if (action == MenuAction_Select && param2 == 1)
     {
         SetClientQueuePoints(param1, 0);
-        CPrintToChat(param1, "{olive}[VSH]{default} %t", "vsh_to0_done");
+        CPrintToChat(param1, "{grey}[VSH]{white} %t", "vsh_to0_done");
         new cl = FindNextHaleEx();
         if (IsValidClient(cl)) SkipHalePanelNotify(cl);
     }
@@ -6397,6 +6394,7 @@ public Action:HalePanel(client, args)
         Format(s, size, "%t", "vsh_menu_11");
         DrawPanelItem(panel, s);
     }*/
+    DrawPanelItem(panel, s, ITEMDRAW_SPACER);
     Format(s, size, "%t", "vsh_menu_exit");
     DrawPanelItem(panel, s);
     SendPanelToClient(panel, client, HalePanelH, 9001);
@@ -7325,7 +7323,7 @@ public ClasshelpinfoTogglePanelH(Handle:menu, MenuAction:action, param1, param2)
                 SetClientCookie(param1, ClasshelpinfoCookie, "0");
             else
                 SetClientCookie(param1, ClasshelpinfoCookie, "1");
-            CPrintToChat(param1, "{olive}[VSH]{default} %t", "vsh_classinfo", param2 == 2 ? "off" : "on");
+            CPrintToChat(param1, "{grey}[VSH]{white} %t", "vsh_classinfo", param2 == 2 ? "off" : "on");
         }
     }
 }
@@ -7362,7 +7360,7 @@ public Action:MusicTogglePanel(client)
     if (!g_bAreEnoughPlayersPlaying || !client)
         return Plugin_Handled;
     new Handle:panel = CreatePanel();
-    SetPanelTitle(panel, "Turn the VS Saxton Hale music...");
+    SetPanelTitle(panel, "Turn the VS Saxton Hale Music");
     DrawPanelItem(panel, "On");
     DrawPanelItem(panel, "Off");
     SendPanelToClient(panel, client, MusicTogglePanelH, 9001);
@@ -7382,7 +7380,7 @@ public MusicTogglePanelH(Handle:menu, MenuAction:action, param1, param2)
             }
             else
                 SetClientSoundOptions(param1, SOUNDEXCEPT_MUSIC, true);
-            CPrintToChat(param1, "{olive}[VSH]{default} %t", "vsh_music", param2 == 2 ? "off" : "on");
+            CPrintToChat(param1, "{grey}[VSH]{white} %t", "vsh_music", param2 == 2 ? "off" : "on");
         }
     }
 }
@@ -7397,7 +7395,7 @@ public Action:VoiceTogglePanel(client)
     if (!g_bAreEnoughPlayersPlaying || !client)
         return Plugin_Handled;
     new Handle:panel = CreatePanel();
-    SetPanelTitle(panel, "Turn the VS Saxton Hale voices...");
+    SetPanelTitle(panel, "Turn the VS Saxton Hale Voices");
     DrawPanelItem(panel, "On");
     DrawPanelItem(panel, "Off");
     SendPanelToClient(panel, client, VoiceTogglePanelH, 9001);
@@ -7415,7 +7413,7 @@ public VoiceTogglePanelH(Handle:menu, MenuAction:action, param1, param2)
                 SetClientSoundOptions(param1, SOUNDEXCEPT_VOICE, false);
             else
                 SetClientSoundOptions(param1, SOUNDEXCEPT_VOICE, true);
-            CPrintToChat(param1, "{olive}[VSH]{default} %t", "vsh_voice", param2 == 2 ? "off" : "on");
+            CPrintToChat(param1, "{grey}[VSH]{white} %t", "vsh_voice", param2 == 2 ? "off" : "on");
             if (param2 == 2) CPrintToChat(param1, "%t", "vsh_voice2");
         }
     }
@@ -7727,13 +7725,13 @@ public Action:Debug_ReloadVSH(iClient, iArgc)
     {
         case VSHRState_End, VSHRState_Disabled:
         {
-            CReplyToCommand(iClient, "{olive}[VSH]{default} The plugin has been reloaded.");
+            CReplyToCommand(iClient, "{grey}[VSH]{white} The plugin has been reloaded.");
             SetClientQueuePoints(Hale, 0);
             ServerCommand("sm plugins reload saxtonhale");
         }
         default:
         {
-            CReplyToCommand(iClient, "{olive}[VSH]{default} The plugin is set to reload.");
+            CReplyToCommand(iClient, "{grey}[VSH]{white} The plugin is set to reload.");
             SetClientQueuePoints(Hale, 0);
         }
     }
